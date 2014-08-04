@@ -1,0 +1,19 @@
+<html>
+{% load staticfiles %}
+<head>
+    <title>Games</title>
+     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+     <script src="{% static "js/snake.js" %}" type="text/javascript"></script>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        {{ user.username }}
+        <a href = "{% url "logout" %}">LOGOUT</a>
+        <a href = "{% url "profile" %}">PROFILE</a>
+    {% else %}
+        <a href = "{% url "login" %}">LOGIN</a>
+        <a href = "{% url "register" %}">REGISTER</a>
+    {% endif %}
+    {% block content %}{% endblock %}
+</body>
+</html>
