@@ -32,6 +32,23 @@ $(document).ready(function () {
         // Create the initial food
         createFood();
 
+        var game = JSON.stringify({game:"sn"});
+        $.ajax({
+            url:'/user_high_score/',
+            dataType: 'json',
+            type: 'POST',
+            data: game,
+            success: function(data){
+                highScore = data['score__max'];
+                if(highScore == null){
+                    highScore = 0;
+                }
+            },
+            error: function(data){
+                console.log(data);
+            }
+        });
+
         // Let's set the game loop to run every 60 milliseconds
         gameLoopInterval = setInterval(gameLoop, 60);
     }
@@ -58,6 +75,26 @@ $(document).ready(function () {
     }
 
     function gameOver() {
+        var stuff = JSON.stringify({
+            score: score,
+            game: "sn"
+        });
+        $.ajax({
+            url: "/send_score/",
+            type: "POST",
+            dataType:"json",
+            data: stuff,
+            success: function(data){
+
+                console.log("itworkedokay");
+                console.log(data)
+            },
+            error: function(data){
+                console.log(data);
+            }
+
+
+        });
         $("#startGame").show();
         clearInterval(gameLoopInterval);
     }

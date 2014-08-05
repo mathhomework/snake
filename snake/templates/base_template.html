@@ -6,14 +6,17 @@
      <script src="{% static "js/snake.js" %}" type="text/javascript"></script>
 </head>
 <body>
-    {% if user.is_authenticated %}
-        {{ user.username }}
-        <a href = "{% url "logout" %}">LOGOUT</a>
-        <a href = "{% url "profile" %}">PROFILE</a>
-    {% else %}
-        <a href = "{% url "login" %}">LOGIN</a>
-        <a href = "{% url "register" %}">REGISTER</a>
-    {% endif %}
+    <div>
+        {% if user.is_authenticated %}
+            {{ user.username }}
+            <a href = "{% url "logout" %}">LOGOUT</a>
+            <a href = "{% url "profile" %}">PROFILE</a>
+            <a href = "{% url "snake" %}">SNAKE</a>
+        {% else %}
+            <a href = "{% url "login" %}">LOGIN</a>
+            <a href = "{% url "register" %}">REGISTER</a>
+        {% endif %}
+    </div>
     {% block content %}{% endblock %}
 </body>
 </html>
