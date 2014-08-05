@@ -1,0 +1,7 @@
+{% extends "base_template.html" %}
+{% block content %}
+    LEADERBOARDSSS!
+    {% for score in scores %}
+        <p>{{ score.score }} {{ score.user }} {{ score.game }}</p>
+    {% endfor %}
+{% endblock %}

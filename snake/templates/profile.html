@@ -2,4 +2,8 @@
 {% block content %}
     Your Name {{ user.username}}
     Your email {{ user.email }}
+    <p>Average: {{ average.score__avg }}</p>
+    {% for score in scores %}
+        <p>{{ score.user }} {{ score.score }} {{ score.game }}</p>
+    {% endfor %}
 {% endblock %}

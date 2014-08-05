@@ -17,4 +17,5 @@ urlpatterns = patterns('',
     url(r'^profile/$', 'snake.views.profile', name = "profile"),
     url(r'^send_score/', 'snake.views.send_score', name = "send_score"),
     url(r'^user_high_score/', 'snake.views.user_high_score', name = "user_high_score"),
+    url(r'^leaderboard/', 'snake.views.leaderboard', name = "leaderboard"),
 )

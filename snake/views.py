@@ -1,7 +1,7 @@
 import json
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from django.db.models import Max
+from django.db.models import Max, Avg
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -58,4 +58,17 @@ def send_score(request):
 def profile(request):
     if not request.user.is_authenticated():
         return redirect("login")
-    return render(request, 'profile.html', {})
+    else:
+        my_scores = Score.objects.filter(user=request.user)
+        data = {
+            "scores": my_scores.order_by("-score"),
+            "average": my_scores.aggregate(Avg('score'))
+        }
+        print data
+        return render(request, 'profile.html', data)
+
+
+def leaderboard(request):
+    data = {"scores": Score.objects.order_by("-score")[:5]}
+    print data
+    return render(request, "leaderboard.html", data)
